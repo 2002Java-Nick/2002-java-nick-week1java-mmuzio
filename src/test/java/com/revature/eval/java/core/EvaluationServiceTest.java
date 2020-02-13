@@ -84,7 +84,7 @@ public class EvaluationServiceTest {
 //		final String expected = "CMOS";
 //		assertEquals(expected, evaluationService.acronym(phrase));
 //	}
-
+//
 //	/*******************************************************************
 //	 * Question 3
 //	 ******************************************************************/
@@ -118,7 +118,7 @@ public class EvaluationServiceTest {
 //		EvaluationService.Triangle triangle = new EvaluationService.Triangle(4, 4, 4);
 //		assertFalse(triangle.isScalene());
 //	}
-////
+//
 //	@Test
 //	public void verySmallTrianglesCanBeScalene() {
 //		EvaluationService.Triangle triangle = new EvaluationService.Triangle(0.5, 0.4, 0.6);
@@ -190,7 +190,7 @@ public class EvaluationServiceTest {
 //		expectedException.expect(IllegalArgumentException.class);
 //		evaluationService.cleanPhoneNumber("123-@:!-7890");
 //	}
-
+//
 //	/*******************************************************************
 //	 * Question 6
 //	 ******************************************************************/
@@ -248,57 +248,57 @@ public class EvaluationServiceTest {
 //		Map<String, Integer> actualWordCount = evaluationService.wordCount("one,\ntwo,\nthree");
 //		assertEquals(expectedWordCount, actualWordCount);
 //	}
-
-	/*******************************************************************
-	 * Question 7
-	 ******************************************************************/
-	@Test
-	public void findsAValueInTheMiddleOfAnArray() {
-		List<String> sortedList = Collections.unmodifiableList(Arrays.asList("1", "3", "4", "6", "8", "9", "11"));
-
-		EvaluationService.BinarySearch<String> search = new EvaluationService.BinarySearch<>(sortedList);
-
-		assertEquals(3, search.indexOf("6"));
-	}
-
-	@Test
-	public void findsAValueAtTheBeginningOfAnArray() {
-		List<Integer> sortedList = Collections.unmodifiableList(Arrays.asList(1, 3, 4, 6, 8, 9, 11));
-
-		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedList);
-
-		assertEquals(0, search.indexOf(1));
-	}
-
-	@Test
-	public void findsAValueAtTheEndOfAnArray() {
-		List<Integer> sortedList = Collections.unmodifiableList(Arrays.asList(1, 3, 4, 6, 8, 9, 11));
-
-		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedList);
-
-		assertEquals(6, search.indexOf(11));
-	}
-
-	@Test
-	public void findsAValueInAnArrayOfOddLength() {
-		List<Integer> sortedListOfOddLength = Collections
-				.unmodifiableList(Arrays.asList(1, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 634));
-
-		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedListOfOddLength);
-
-		assertEquals(9, search.indexOf(144));
-	}
-
-	@Test
-	public void findsAValueInAnArrayOfEvenLength() {
-		List<Integer> sortedListOfEvenLength = Collections
-				.unmodifiableList(Arrays.asList(1, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377));
-
-		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedListOfEvenLength);
-
-		assertEquals(5, search.indexOf(21));
-	}
-
+//
+//	/*******************************************************************
+//	 * Question 7
+//	 ******************************************************************/
+//	@Test
+//	public void findsAValueInTheMiddleOfAnArray() {
+//		List<String> sortedList = Collections.unmodifiableList(Arrays.asList("1", "3", "4", "6", "8", "9", "11"));
+//
+//		EvaluationService.BinarySearch<String> search = new EvaluationService.BinarySearch<>(sortedList);
+//
+//		assertEquals(3, search.indexOf("6"));
+//	}
+//
+//	@Test
+//	public void findsAValueAtTheBeginningOfAnArray() {
+//		List<Integer> sortedList = Collections.unmodifiableList(Arrays.asList(1, 3, 4, 6, 8, 9, 11));
+//
+//		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedList);
+//
+//		assertEquals(0, search.indexOf(1));
+//	}
+//
+//	@Test
+//	public void findsAValueAtTheEndOfAnArray() {
+//		List<Integer> sortedList = Collections.unmodifiableList(Arrays.asList(1, 3, 4, 6, 8, 9, 11));
+//
+//		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedList);
+//
+//		assertEquals(6, search.indexOf(11));
+//	}
+//
+//	@Test
+//	public void findsAValueInAnArrayOfOddLength() {
+//		List<Integer> sortedListOfOddLength = Collections
+//				.unmodifiableList(Arrays.asList(1, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 634));
+//
+//		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedListOfOddLength);
+//
+//		assertEquals(9, search.indexOf(144));
+//	}
+//
+//	@Test
+//	public void findsAValueInAnArrayOfEvenLength() {
+//		List<Integer> sortedListOfEvenLength = Collections
+//				.unmodifiableList(Arrays.asList(1, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377));
+//
+//		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedListOfEvenLength);
+//
+//		assertEquals(5, search.indexOf(21));
+//	}
+//
 //	/*******************************************************************
 //	 * Question 8
 //	 ******************************************************************/
@@ -364,7 +364,7 @@ public class EvaluationServiceTest {
 //
 //		assertTrue(evaluationService.isArmstrongNumber(input));
 //	}
-
+//
 //	/*******************************************************************
 //	 * Question 10
 //	 ******************************************************************/
@@ -606,55 +606,55 @@ public class EvaluationServiceTest {
 //		assertEquals(LocalDateTime.of(2046, Month.OCTOBER, 3, 1, 46, 39),
 //				evaluationService.getGigasecondDate(LocalDateTime.of(2015, Month.JANUARY, 24, 23, 59, 59)));
 //	}
-//
-//	/*******************************************************************
-//	 * Question 18
-//	 ******************************************************************/
-//	@Test
-//	public void testSumOfMultiplesOf4and6UpToFifteen() {
-//
-//		int[] set = { 4, 6 };
-//		int output = evaluationService.getSumOfMultiples(15, set);
-//		assertEquals(30, output);
-//
-//	}
-//
-//	@Test
-//	public void testSumOfMultiplesOf5and6and8UpToOneHundredFifty() {
-//
-//		int[] set = { 5, 6, 8 };
-//		int output = evaluationService.getSumOfMultiples(150, set);
-//		assertEquals(4419, output);
-//
-//	}
-//
-//	@Test
-//	public void testSumOfMultiplesOf5and25UpToFiftyOne() {
-//
-//		int[] set = { 5, 25 };
-//		int output = evaluationService.getSumOfMultiples(51, set);
-//		assertEquals(275, output);
-//
-//	}
-//
-//	@Test
-//	public void testSumOfMultiplesOf43and47UpToTenThousand() {
-//
-//		int[] set = { 43, 47 };
-//		int output = evaluationService.getSumOfMultiples(10000, set);
-//		assertEquals(2203160, output);
-//
-//	}
-//
-//	@Test
-//	public void testSumOfMultiplesOfOneUpToOneHundred() {
-//
-//		int[] set = { 1 };
-//		int output = evaluationService.getSumOfMultiples(100, set);
-//		assertEquals(4950, output);
-//
-//	}
-//
+
+	/*******************************************************************
+	 * Question 18
+	 ******************************************************************/
+	@Test
+	public void testSumOfMultiplesOf4and6UpToFifteen() {
+
+		int[] set = { 4, 6 };
+		int output = evaluationService.getSumOfMultiples(15, set);
+		assertEquals(30, output);
+
+	}
+
+	@Test
+	public void testSumOfMultiplesOf5and6and8UpToOneHundredFifty() {
+
+		int[] set = { 5, 6, 8 };
+		int output = evaluationService.getSumOfMultiples(150, set);
+		assertEquals(4419, output);
+
+	}
+
+	@Test
+	public void testSumOfMultiplesOf5and25UpToFiftyOne() {
+
+		int[] set = { 5, 25 };
+		int output = evaluationService.getSumOfMultiples(51, set);
+		assertEquals(275, output);
+
+	}
+
+	@Test
+	public void testSumOfMultiplesOf43and47UpToTenThousand() {
+
+		int[] set = { 43, 47 };
+		int output = evaluationService.getSumOfMultiples(10000, set);
+		assertEquals(2203160, output);
+
+	}
+
+	@Test
+	public void testSumOfMultiplesOfOneUpToOneHundred() {
+
+		int[] set = { 1 };
+		int output = evaluationService.getSumOfMultiples(100, set);
+		assertEquals(4950, output);
+
+	}
+
 //	/*******************************************************************
 //	 * Question 19
 //	 ******************************************************************/
@@ -682,7 +682,7 @@ public class EvaluationServiceTest {
 //	public void testThatStringContainingPunctuationIsInvalid() {
 //		assertFalse(evaluationService.isLuhnValid("055-444-285"));
 //	}
-//
+
 //	/*******************************************************************
 //	 * Question 20
 //	 ******************************************************************/

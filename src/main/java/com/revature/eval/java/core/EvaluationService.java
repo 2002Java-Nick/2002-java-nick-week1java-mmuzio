@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EvaluationService {
 
@@ -16,6 +18,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	//complete
 	public String reverse(String string) {
 		char[] reversed = new char[string.length()];
 		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
@@ -32,6 +35,7 @@ public class EvaluationService {
 	 * @param phrase
 	 * @return
 	 */
+	//complete
 	public String acronym(String phrase) {
 		String[] splitString = (phrase.split("[\\s-]+"));
 		StringBuilder acronymString = new StringBuilder("");
@@ -50,6 +54,7 @@ public class EvaluationService {
 	 * different lengths.
 	 *
 	 */
+	//complete
 	static class Triangle {
 		private double sideOne;
 		private double sideTwo;
@@ -128,6 +133,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	//complete
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
 		int scrabbleScore = 0;
@@ -197,6 +203,7 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
+	//complete
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
 		StringBuilder dirtyString = new StringBuilder(string);
@@ -274,6 +281,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	//complete
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
 		String[] splitString = (string.split("[\\s,]+"));
@@ -365,6 +373,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	//complete
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
 		String[] splitString = (string.split("[\\s]+"));
@@ -405,6 +414,7 @@ public class EvaluationService {
 	 * @param input
 	 * @return
 	 */
+	//complete
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
 		String intString = Integer.toString(input);
@@ -428,33 +438,23 @@ public class EvaluationService {
 	 * @param l
 	 * @return
 	 */
-	static List<Long> listOfPrimes = new ArrayList<Long>();
+	//complete
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		while (l != 1) {
-			calculatePrimeFactors(l);
-			
+		List<Long> listOfPrimes = new ArrayList<Long>();
+		long primeLong = l;
+		while (primeLong > 1L) {
+			System.out.println("looping");
+			for (long count = 2L; count <= primeLong; count++) {
+				if (primeLong % count == 0) {
+					listOfPrimes.add(count);
+					primeLong = primeLong / count;
+					count = 1L;
+				} else {
+					continue;
+				}
+			}
 		}
 		return listOfPrimes;
-		if (l == 1) {
-			return listOfPrimes;
-		} else {
-			calculatePrimeFactors(l);
-		}
-		for (int count=2; count<l; count++) {
-			if (l % count == 0) {
-				return count*calculatePrimeFactorsOf(l / count);
-			}
-		}
-		return null;
-	}
-	
-	public long calculatePrimeFactors(long l) {
-		for (long count=2; count<l; count++) {
-			if (l % count == 0) {
-				listOfPrimes.add(count)
-			}
-		}
 	}
 
 	/**
@@ -483,6 +483,7 @@ public class EvaluationService {
 	 * gur ynml qbt. ROT13 Gur dhvpx oebja sbk whzcf bire gur ynml qbt. gives The
 	 * quick brown fox jumps over the lazy dog.
 	 */
+	//complete
 	static class RotationalCipher {
 		private int key;
 
@@ -493,7 +494,27 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			StringBuilder rotatedString = new StringBuilder("");
+			for (int count = 0; count<string.length(); count++) {
+				int ascii = (int) string.charAt(count);
+				if (ascii >= 65 && ascii <= 90) {
+					if (ascii + key > 90) {
+						rotatedString.append((char) (ascii-(26-key)));
+					} else {
+						rotatedString.append((char) (ascii+key));
+					}
+				} else if (ascii >= 97 && ascii <= 122){
+					if (ascii + key > 122) {
+						rotatedString.append((char) (ascii-(26-key)));
+					} else {
+						rotatedString.append((char) (ascii+key));
+					}
+				} else {
+					rotatedString.append(string.charAt(count));
+				}
+			}
+			System.out.println(String.join("", rotatedString));
+			return String.join("", rotatedString);
 		}
 
 	}
@@ -510,8 +531,59 @@ public class EvaluationService {
 	 * @param i
 	 * @return
 	 */
+	//complete
 	public int calculateNthPrime(int i) {
 		// TODO Write an implementation for this method declaration
+		int upperBound =  (int) Math.ceil(i*(Math.log(Math.log(i))+Math.log(i))); // sets an upper bound for nth prime
+		int[] firstPrimes = {2,3,5,7}; // gets the first few primes out of the way because upper bound doesn't apply
+		
+		// making a map from each integer to a boolean that indicates true if it is prime
+		Map <Integer, Boolean> sieveOfEratosthenes = new HashMap<Integer, Boolean>();
+		
+		// here we handle illegal arguments -> you can't have a 0th or negative nth prime!
+		if (i <= 0) {
+			throw new IllegalArgumentException("No such prime!");
+		}
+		// handling the first few primes
+		else if (i <= 4) {
+			System.out.println(firstPrimes[i-1]);
+			return firstPrimes[i-1];
+		} 
+		// handle the remaining primes using the Sieve of Eratosthenes technique
+		else {
+			for (int count = 2; count <= upperBound; count++) {
+				sieveOfEratosthenes.put(count, true);
+			}
+			for (int count = 2; count <= upperBound; count++) {
+				int countUp = count*count;
+				if (countUp > upperBound) {
+					break;
+				} else {
+					while (countUp <= upperBound) {
+						if (sieveOfEratosthenes.get(countUp) == true) {
+							sieveOfEratosthenes.put(countUp, false);
+							countUp = countUp + count;
+						} else {
+							countUp = countUp + count;
+						}
+					}
+				}
+			}
+			
+			// here we go back through the map and count the primes until we get to the nth prime
+			int primeCounter = 1;
+			for (int counter = 2; counter <= upperBound; counter++) {
+				if (sieveOfEratosthenes.get(counter) == true) {
+					if (primeCounter == i) {
+						System.out.println(counter);
+						return counter;
+					} else {
+						primeCounter = primeCounter + 1;
+					}
+					
+				}
+			}
+		}
 		return 0;
 	}
 
@@ -677,8 +749,27 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		string = string.replaceAll("\\s","");
+		String regex = ".*[\\D].*";
+		boolean matches = !Pattern.matches(regex, string);
+		int sum = 0;
+		if (matches == false) {
+			return false;
+		} else {
+			for (int count = 0; count < string.length(); count++) {
+				int number = Integer.parseInt(String.valueOf(string.charAt(count)));
+				if (count % 2 == 0) {
+					sum = sum + number;
+				} else {
+					if (number * 2 > 9) {
+						sum = sum + (number*2 - 9);
+					} else {
+						sum = sum + (number*2);
+					}
+				}
+			}
+		}
+		return (sum % 10) == 0;
 	}
 
 	/**
@@ -709,9 +800,56 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		
-		// TODO Write an implementation for this method declaration
-		return 0;
+		Pattern numberPattern = Pattern.compile("(-?[0-9]+)");
+        Matcher numberMatcher = numberPattern.matcher(string);
+        int count = 1;
+        int result = 0;
+        if (string.contains("plus")) {
+        	while(numberMatcher.find()) {
+        		int number = Integer.parseInt(numberMatcher.group());
+        		if (count == 1) {
+        			result = number;
+        			count = count + 1;
+        		} else {
+        			result = result + number;
+        		}
+                
+            }
+        } else if (string.contains("minus")) {
+        	while(numberMatcher.find()) {
+        		int number = Integer.parseInt(numberMatcher.group());
+        		if (count == 1) {
+        			result = number;
+        			count = count + 1;
+        		} else {
+        			result = result - number;
+        		}
+                
+            }
+        } else if (string.contains("multiplied")) {
+        	while(numberMatcher.find()) {
+        		int number = Integer.parseInt(numberMatcher.group());
+        		if (count == 1) {
+        			result = number;
+        			count = count + 1;
+        		} else {
+        			result = result * number;
+        		}
+                
+            }
+        } else if (string.contains("divided")) {
+        	while(numberMatcher.find()) {
+        		int number = Integer.parseInt(numberMatcher.group());
+        		if (count == 1) {
+        			result = number;
+        			count = count + 1;
+        		} else {
+        			result = result / number;
+        		}
+                
+            }
+        }
+		return result;
 	}
 
 }
