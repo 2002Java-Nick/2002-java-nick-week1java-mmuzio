@@ -3,6 +3,9 @@ package com.revature.eval.java.core;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class EvaluationService {
 
@@ -30,8 +33,12 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String[] splitString = (phrase.split("[\\s-]+"));
+		StringBuilder acronymString = new StringBuilder("");
+		for (String x: splitString) {
+			acronymString.append(x.charAt(0));
+		}
+		return String.join("", acronymString).toUpperCase();
 	}
 
 	/**
@@ -84,17 +91,23 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
+			if ((getSideOne() == getSideTwo()) && (getSideTwo() == getSideThree())) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
+			if (!isEquilateral() && (getSideOne() == getSideTwo() | getSideTwo() == getSideThree() | getSideOne() == getSideThree())) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
+			if ((getSideOne() != getSideTwo()) && (getSideTwo() != getSideThree())) {
+				return true;
+			}
 			return false;
 		}
 
@@ -117,7 +130,40 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int scrabbleScore = 0;
+		int wordLength = string.length();
+		String lowerCaseStr = string.toLowerCase();
+		Map <Character, Integer> scrabbleScores = new HashMap<Character, Integer>();
+		scrabbleScores.put('a', 1);
+		scrabbleScores.put('b', 3);
+		scrabbleScores.put('c', 3);
+		scrabbleScores.put('d', 2);
+		scrabbleScores.put('e', 1);
+		scrabbleScores.put('f', 4);
+		scrabbleScores.put('g', 2);
+		scrabbleScores.put('h', 4);
+		scrabbleScores.put('i', 1);
+		scrabbleScores.put('j', 8);
+		scrabbleScores.put('k', 5);
+		scrabbleScores.put('l', 1);
+		scrabbleScores.put('m', 3);
+		scrabbleScores.put('n', 1);
+		scrabbleScores.put('o', 1);
+		scrabbleScores.put('p', 3);
+		scrabbleScores.put('q', 10);
+		scrabbleScores.put('r', 1);
+		scrabbleScores.put('s', 1);
+		scrabbleScores.put('t', 1);
+		scrabbleScores.put('u', 1);
+		scrabbleScores.put('v', 4);
+		scrabbleScores.put('w', 4);
+		scrabbleScores.put('x', 8);
+		scrabbleScores.put('y', 4);
+		scrabbleScores.put('z', 10);
+		for (int count=0; count < wordLength; count++) {
+			scrabbleScore += scrabbleScores.get(lowerCaseStr.charAt(count));
+		}
+		return scrabbleScore;
 	}
 
 	/**
@@ -153,7 +199,70 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		StringBuilder dirtyString = new StringBuilder(string);
+		int stringLength = string.length();
+		for (int count = 0; count < stringLength; count++) {
+			char digit = dirtyString.charAt(count);
+			switch(digit) {
+				case '0':
+					break;
+				case '1':
+					break;
+				case '2':
+					break;
+				case '3':
+					break;
+				case '4':
+					break;
+				case '5':
+					break;
+				case '6':
+					break;
+				case '7':
+					break;
+				case '8':
+					break;
+				case '9':
+					break;
+				case ' ':
+					dirtyString.deleteCharAt(count);
+					--stringLength;
+					--count;
+					break;
+				case '(':
+					dirtyString.deleteCharAt(count);
+					--stringLength;
+					--count;
+					break;
+				case ')':
+					dirtyString.deleteCharAt(count);
+					--stringLength;
+					--count;
+					break;
+				case '.':
+					dirtyString.deleteCharAt(count);
+					--stringLength;
+					--count;
+					break;
+				case '-':
+					dirtyString.deleteCharAt(count);
+					--stringLength;
+					--count;
+					break;
+				default:
+					throw new IllegalArgumentException();
+			}
+		}
+		int cleanLength = dirtyString.length();
+		if (cleanLength > 10) {
+			char countryCode = dirtyString.charAt(0);
+			if (countryCode == '1') {
+				dirtyString.deleteCharAt(0);
+			} else {
+				throw new IllegalArgumentException();
+			}
+		}
+		return dirtyString.toString();
 	}
 
 	/**
@@ -167,7 +276,17 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String[] splitString = (string.split("[\\s,]+"));
+		Map<String, Integer> wordDict = new HashMap<String, Integer>();
+		for (String x: splitString) {
+			if (wordDict.containsKey(x)) {
+				wordDict.put(x, wordDict.get(x) + 1);
+			} else {
+				wordDict.put(x, 1);
+			}
+		}
+		//System.out.println(Arrays.asList(wordDict));
+		return wordDict;
 	}
 
 	/**
@@ -210,6 +329,7 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
+			int listLen = t.length();
 			return 0;
 		}
 
@@ -247,7 +367,27 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String[] splitString = (string.split("[\\s]+"));
+		int wordsLen = splitString.length;
+		StringBuilder pigLatinString = new StringBuilder("");
+		for (int words = 0; words < wordsLen; words++) {
+			String currentWord = splitString[words];
+			if (currentWord.charAt(0) == 'q') {
+				pigLatinString.append(currentWord.substring(2) + currentWord.substring(0, 2) + "ay ");
+			} else {
+				int strLen = currentWord.length();
+				
+				for (int count = 0; count < strLen; count++) {
+					if (currentWord.charAt(count) == 'a' || currentWord.charAt(count) == 'e' || currentWord.charAt(count) == 'i' || currentWord.charAt(count) == 'o' || currentWord.charAt(count) == 'u') {
+						pigLatinString.append(currentWord.substring(count) + currentWord.substring(0, count) + "ay ");
+						break;
+					} else {
+						continue;
+					}
+				}
+			}
+		}
+		return String.join("", pigLatinString).trim();
 	}
 
 	/**
@@ -267,7 +407,15 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		String intString = Integer.toString(input);
+		double numDigits = intString.length();
+		double sum = 0;
+		for (int count = 0; count < numDigits; count++) {
+			double digit = Integer.parseInt(String.valueOf(intString.charAt(count)));
+			double digitRaised = Math.pow(digit, numDigits); 
+			sum = sum + digitRaised;  
+		}
+		return (input == sum);
 	}
 
 	/**
@@ -280,9 +428,33 @@ public class EvaluationService {
 	 * @param l
 	 * @return
 	 */
+	static List<Long> listOfPrimes = new ArrayList<Long>();
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		// TODO Write an implementation for this method declaration
+		while (l != 1) {
+			calculatePrimeFactors(l);
+			
+		}
+		return listOfPrimes;
+		if (l == 1) {
+			return listOfPrimes;
+		} else {
+			calculatePrimeFactors(l);
+		}
+		for (int count=2; count<l; count++) {
+			if (l % count == 0) {
+				return count*calculatePrimeFactorsOf(l / count);
+			}
+		}
 		return null;
+	}
+	
+	public long calculatePrimeFactors(long l) {
+		for (long count=2; count<l; count++) {
+			if (l % count == 0) {
+				listOfPrimes.add(count)
+			}
+		}
 	}
 
 	/**
@@ -537,6 +709,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
+		
 		// TODO Write an implementation for this method declaration
 		return 0;
 	}
