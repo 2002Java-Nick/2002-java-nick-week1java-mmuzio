@@ -1,11 +1,16 @@
 package com.revature.eval.java.core;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -334,10 +339,64 @@ public class EvaluationService {
 	 */
 	static class BinarySearch<T> {
 		private List<T> sortedList;
-
+		private List<Integer> integerList = (List<Integer>) sortedList;
+		
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
-			int listLen = t.length();
+			int index = (int) t;
+			int length = sortedList.size();
+			int count = 0;
+			int mid = (count + length - 1) / 2;
+			/*
+			if (((String) sortedList.get(mid)) instanceof String) {
+				int num = 0;
+				for (T x: sortedList) {
+					//int setInteger = Integer.parseInt(String.valueOf(x));
+					int setInteger = ((Integer) x).intValue();
+					sortedList.set(num, (int) setInteger);
+					num = num + 1;
+				}
+			}
+			*/
+			/*
+			while (count < length) {
+				if (((int) sortedList.get(mid)) == index) {
+					System.out.println("mid is: " + mid);
+					return mid;
+				} else if (((int) sortedList.get(mid)) > index) {
+					System.out.println("Taking the left, mid is: " + mid);
+					//mid = (int) Math.ceil(((double) mid) / 2.0);
+					mid = mid / 2;
+					System.out.println("Taking the left, new mid is: " + mid);
+					count = count + 1;
+				} else  {
+					System.out.println("Taking the right, mid is: " + mid);
+					//mid = (int) Math.ceil(((double) mid) + (((double) mid) / 2.0));
+					mid = mid + mid / 2;
+					System.out.println("Taking the right, new mid is: " + mid);
+					count = count + 1;
+				}
+			}
+			*/
+			while (count < length) {
+				if (((Integer) sortedList.get(mid)).intValue() == index) {
+					System.out.println("mid is: " + mid);
+					return mid;
+				} else if (((Integer) sortedList.get(mid)).intValue() > index) {
+					System.out.println("Taking the left, mid is: " + mid);
+					//mid = (int) Math.ceil(((double) mid) / 2.0);
+					mid = mid / 2;
+					System.out.println("Taking the left, new mid is: " + mid);
+					count = count + 1;
+				} else  {
+					System.out.println("Taking the right, mid is: " + mid);
+					//mid = (int) Math.ceil(((double) mid) + (((double) mid) / 2.0));
+					mid = mid + mid / 2;
+					System.out.println("Taking the right, new mid is: " + mid);
+					count = count + 1;
+				}
+			}
+			System.out.println("mid is: " + 0);
 			return 0;
 		}
 
@@ -443,7 +502,6 @@ public class EvaluationService {
 		List<Long> listOfPrimes = new ArrayList<Long>();
 		long primeLong = l;
 		while (primeLong > 1L) {
-			System.out.println("looping");
 			for (long count = 2L; count <= primeLong; count++) {
 				if (primeLong % count == 0) {
 					listOfPrimes.add(count);
@@ -513,7 +571,6 @@ public class EvaluationService {
 					rotatedString.append(string.charAt(count));
 				}
 			}
-			System.out.println(String.join("", rotatedString));
 			return String.join("", rotatedString);
 		}
 
@@ -546,7 +603,6 @@ public class EvaluationService {
 		}
 		// handling the first few primes
 		else if (i <= 4) {
-			System.out.println(firstPrimes[i-1]);
 			return firstPrimes[i-1];
 		} 
 		// handle the remaining primes using the Sieve of Eratosthenes technique
@@ -575,7 +631,6 @@ public class EvaluationService {
 			for (int counter = 2; counter <= upperBound; counter++) {
 				if (sieveOfEratosthenes.get(counter) == true) {
 					if (primeCounter == i) {
-						System.out.println(counter);
 						return counter;
 					} else {
 						primeCounter = primeCounter + 1;
@@ -619,9 +674,50 @@ public class EvaluationService {
 		 * @param string
 		 * @return
 		 */
+		//complete
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String lowerCase = string.toLowerCase();
+			lowerCase= lowerCase.replaceAll("[\\s,.]","");
+			int length = lowerCase.length();
+			StringBuilder result = new StringBuilder("");
+			Map <Character, Character> encoding = new HashMap<Character, Character>();
+			encoding.put('a', 'z');
+			encoding.put('b', 'y');
+			encoding.put('c', 'x');
+			encoding.put('d', 'w');
+			encoding.put('e', 'v');
+			encoding.put('f', 'u');
+			encoding.put('g', 't');
+			encoding.put('h', 's');
+			encoding.put('i', 'r');
+			encoding.put('j', 'q');
+			encoding.put('k', 'p');
+			encoding.put('l', 'o');
+			encoding.put('m', 'n');
+			encoding.put('n', 'm');
+			encoding.put('o', 'l');
+			encoding.put('p', 'k');
+			encoding.put('q', 'j');
+			encoding.put('r', 'i');
+			encoding.put('s', 'h');
+			encoding.put('t', 'g');
+			encoding.put('u', 'f');
+			encoding.put('v', 'e');
+			encoding.put('w', 'd');
+			encoding.put('x', 'c');
+			encoding.put('y', 'b');
+			encoding.put('z', 'a');
+			for (int count = 0; count < length; count++) {
+				if (count % 5 == 0 && count > 4) {
+					result.append(" ");
+				}
+				if (encoding.containsKey(lowerCase.charAt(count))) {
+					result.append(encoding.get(lowerCase.charAt(count)));
+				} else {
+					result.append(lowerCase.charAt(count));
+				}
+			}
+			return result.toString();
 		}
 
 		/**
@@ -630,9 +726,47 @@ public class EvaluationService {
 		 * @param string
 		 * @return
 		 */
+		//complete
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String lowerCase = string.toLowerCase();
+			lowerCase= lowerCase.replaceAll("[\\s,.]","");
+			int length = lowerCase.length();
+			StringBuilder result = new StringBuilder("");
+			Map <Character, Character> encoding = new HashMap<Character, Character>();
+			encoding.put('a', 'z');
+			encoding.put('b', 'y');
+			encoding.put('c', 'x');
+			encoding.put('d', 'w');
+			encoding.put('e', 'v');
+			encoding.put('f', 'u');
+			encoding.put('g', 't');
+			encoding.put('h', 's');
+			encoding.put('i', 'r');
+			encoding.put('j', 'q');
+			encoding.put('k', 'p');
+			encoding.put('l', 'o');
+			encoding.put('m', 'n');
+			encoding.put('n', 'm');
+			encoding.put('o', 'l');
+			encoding.put('p', 'k');
+			encoding.put('q', 'j');
+			encoding.put('r', 'i');
+			encoding.put('s', 'h');
+			encoding.put('t', 'g');
+			encoding.put('u', 'f');
+			encoding.put('v', 'e');
+			encoding.put('w', 'd');
+			encoding.put('x', 'c');
+			encoding.put('y', 'b');
+			encoding.put('z', 'a');
+			for (int count = 0; count < length; count++) {
+				if (encoding.containsKey(lowerCase.charAt(count))) {
+					result.append(encoding.get(lowerCase.charAt(count)));
+				} else {
+					result.append(lowerCase.charAt(count));
+				}
+			}
+			return result.toString();
 		}
 	}
 
@@ -658,9 +792,27 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	//complete
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		string = string.replaceAll("-","");
+		int length = string.length();
+		int lastNumber = 0;
+		if (string.charAt(length-1) == 'X') {
+			lastNumber = 10;
+			string = string.substring(0,length-1).replaceAll("[^\\d.]", "");
+		} else {
+			string = string.substring(0,length).replaceAll("[^\\d.]", "");
+			if (string.length() < 10) {
+				return false;
+			}
+			lastNumber = Integer.parseInt(String.valueOf(string.charAt(length-1)));
+		}
+		int ret = 0;
+		for (int count = 0; count < length-1; count++) {
+			int number = (10-count)*Integer.parseInt(String.valueOf(string.charAt(count)));
+			ret = ret + number;
+		}
+		return (((ret + lastNumber) % 11) == 0);
 	}
 
 	/**
@@ -676,9 +828,17 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	//complete
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		String lowerCase = string.toLowerCase();
+		lowerCase = lowerCase.replaceAll("\\s","");
+		int length = lowerCase.length();
+		Set<Character> set = new HashSet<Character>();
+		// Displaying the Set
+		for (int index = 0; index < length; index++) {
+			set.add(lowerCase.charAt(index));
+		}
+		return (set.size() == 26);
 	}
 
 	/**
@@ -689,8 +849,14 @@ public class EvaluationService {
 	 * @param given
 	 * @return
 	 */
+	//complete
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
+		if (given instanceof LocalDate) {
+		return ((LocalDate) given).atStartOfDay().plusSeconds(1000000000);
+		} 
+		if (given instanceof LocalDateTime) {
+			return ((LocalDateTime) given).plusSeconds(1000000000);
+		} 
 		return null;
 	}
 
@@ -707,9 +873,19 @@ public class EvaluationService {
 	 * @param set
 	 * @return
 	 */
+	//complete
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		Set <Integer> setOfInts = new HashSet<Integer>();
+		for (int j: set) {
+			for (int count = j; count < i; count = count + j) {
+				setOfInts.add(count);
+			}
+		}
+		int ret = 0;
+		for (int x: setOfInts) {
+			ret = ret + x;
+		}
+		return ret; 
 	}
 
 	/**
@@ -748,6 +924,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	//complete
 	public boolean isLuhnValid(String string) {
 		string = string.replaceAll("\\s","");
 		String regex = ".*[\\D].*";
@@ -799,6 +976,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	//complete
 	public int solveWordProblem(String string) {
 		Pattern numberPattern = Pattern.compile("(-?[0-9]+)");
         Matcher numberMatcher = numberPattern.matcher(string);
