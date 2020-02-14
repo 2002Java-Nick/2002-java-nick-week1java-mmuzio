@@ -339,64 +339,24 @@ public class EvaluationService {
 	 */
 	static class BinarySearch<T> {
 		private List<T> sortedList;
-		private List<Integer> integerList = (List<Integer>) sortedList;
 		
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
 			int index = (int) t;
 			int length = sortedList.size();
 			int count = 0;
 			int mid = (count + length - 1) / 2;
-			/*
-			if (((String) sortedList.get(mid)) instanceof String) {
-				int num = 0;
-				for (T x: sortedList) {
-					//int setInteger = Integer.parseInt(String.valueOf(x));
-					int setInteger = ((Integer) x).intValue();
-					sortedList.set(num, (int) setInteger);
-					num = num + 1;
-				}
-			}
-			*/
-			/*
+		
 			while (count < length) {
 				if (((int) sortedList.get(mid)) == index) {
-					System.out.println("mid is: " + mid);
 					return mid;
 				} else if (((int) sortedList.get(mid)) > index) {
-					System.out.println("Taking the left, mid is: " + mid);
-					//mid = (int) Math.ceil(((double) mid) / 2.0);
 					mid = mid / 2;
-					System.out.println("Taking the left, new mid is: " + mid);
 					count = count + 1;
 				} else  {
-					System.out.println("Taking the right, mid is: " + mid);
-					//mid = (int) Math.ceil(((double) mid) + (((double) mid) / 2.0));
 					mid = mid + mid / 2;
-					System.out.println("Taking the right, new mid is: " + mid);
 					count = count + 1;
 				}
 			}
-			*/
-			while (count < length) {
-				if (((Integer) sortedList.get(mid)).intValue() == index) {
-					System.out.println("mid is: " + mid);
-					return mid;
-				} else if (((Integer) sortedList.get(mid)).intValue() > index) {
-					System.out.println("Taking the left, mid is: " + mid);
-					//mid = (int) Math.ceil(((double) mid) / 2.0);
-					mid = mid / 2;
-					System.out.println("Taking the left, new mid is: " + mid);
-					count = count + 1;
-				} else  {
-					System.out.println("Taking the right, mid is: " + mid);
-					//mid = (int) Math.ceil(((double) mid) + (((double) mid) / 2.0));
-					mid = mid + mid / 2;
-					System.out.println("Taking the right, new mid is: " + mid);
-					count = count + 1;
-				}
-			}
-			System.out.println("mid is: " + 0);
 			return 0;
 		}
 
